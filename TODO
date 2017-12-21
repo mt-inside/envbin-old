@@ -1,0 +1,12 @@
+Background the slow tasks (use pusher to update the page)
+use telepresence to debug on k8s
+k8s info
+this is envbin - throw it somewhere and have it tell you where it is. It should show:
+- docker stats
+- azure, GCE, etc
+- env vars
+- filesystems, df, etc
+- cpu, ram, etc
+- all interfaces
+- traceroute to 8.8.8.8
+- virtwhat
