@@ -79,7 +79,20 @@ type ContainerEnv struct {
 }
 
 func getContainerEnv() *ContainerEnv {
-	return nil
+	if _, err := os.Stat("/.dockerenv"); err == nil {
+		return &ContainerEnv{"docker"}
+	} else {
+		return nil
+	}
+	/*
+	* https://stackoverflow.com/questions/20010199/determining-if-a-process-runs-inside-lxc-docker
+	* - .dockerenv
+	* - pid1 cgroups
+	* - rkt??
+	* - systemd nspawn?
+	* - containerd?
+	* - docker-in-docker?
+	 */
 }
 
 type K8sEnv struct {
