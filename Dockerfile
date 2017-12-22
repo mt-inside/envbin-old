@@ -1,5 +1,6 @@
-FROM alpine:3.7
+FROM scratch
 
-ADD . /envbin
+COPY envbin-linux /envbin
+COPY main.html /
 
-CMD cd /envbin && exec ./envbin
+CMD ["/envbin"]

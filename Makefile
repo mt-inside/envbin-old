@@ -1,17 +1,19 @@
 envbin: main.go
 	go build
 
+envbin-linux: main.go
+	GOOS=linux go build -o envbin-linux
+
 run: envbin
 	go run main.go
 
-build-docker: envbin
+build-docker: envbin-linux
 	docker build . -t envbin
 
 run-docker: build-docker
 	docker run --rm --name envbin -d -p 8080 envbin
 
-build-k8s:
-	GOOS=linux go build
+clean:
+	rm -f envbin envbin-linux
 
-
-.PHONY: run build-docker run-docker build-k8s
+.PHONY: run build-docker run-docker build-linux clean
