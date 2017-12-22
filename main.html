@@ -5,7 +5,7 @@
 {{if not .Container}}
 None
 {{else}}
-{{.ContainerEnv.Containerisation}}
+{{.Container.Containerisation}}
 {{end}}
 <li>{{if not .K8s}}
 Seemingly not running on Kubernetes
@@ -20,7 +20,7 @@ Running under Kubernetes {{.Version}} in namespace TODO as service account TODO
 {{if not .Virtual}}
 None
 {{else}}
-{{.VirtualEnv.Virtualisation}}
+{{.Virtual.Virtualisation}}
 {{end}}
 <li>{{if not .Aws}}
 Seemingly not running on AWS
