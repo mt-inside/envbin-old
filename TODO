@@ -1,6 +1,6 @@
 Background the slow tasks (use pusher to update the page)
 use telepresence to debug on k8s
-k8s info
+external IP (via a service) and DNS name of that IP
 this is envbin - throw it somewhere and have it tell you where it is. It should show:
 - docker stats
 - azure, GCE, etc
