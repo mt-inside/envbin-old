@@ -8,7 +8,7 @@ run: envbin
 	go run main.go
 
 build-docker: envbin-linux
-	docker build . -t envbin
+	docker build . --file Dockerfile.ubuntu -t envbin
 
 run-docker: build-docker
 	docker run --rm --name envbin -d -p 8080 envbin

@@ -1,0 +1,11 @@
+FROM ubuntu:17.10
+
+RUN apt-get update \
+    && apt-get install -y \
+        virt-what \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY envbin-linux /envbin
+COPY main.html /
+
+CMD ["/envbin"]
