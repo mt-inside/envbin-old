@@ -1,19 +1,23 @@
 <h1>Hello World!</h1>
-<p>Origin: {{.HostIp}} / {{.Hostname}}</p>
+<p>Origin: {{.Hostname}} / {{.HostIp}} | {{.HostOs}} / {{.HostArch}}</p>
 <p>Client: {{.ClientIp}}</p>
-<p>{{if not .Aws}}
+<p>Containerisation TODO
+<li>{{if not .K8s}}
+Seemingly not running on Kubernetes
+{{else}}
+{{with .K8s}}
+Running under Kubernetes {{.Version}} in namespace TODO as service account TODO
+{{end}}
+{{end}}
+</li>
+</p>
+<p>Virtualisation TODO virt-what
+<li>{{if not .Aws}}
 Seemingly not running on AWS
 {{else}}
 {{with .Aws}}
 Running in AWS {{.AZ}} on a {{.InstanceType}} called {{.InstanceID}} with host IP {{.PrivateIP}}
 {{end}}
 {{end}}
-</p>
-<p>{{if not .K8s}}
-Seemingly not running on Kubernetes
-{{else}}
-{{with .K8s}}
-Running under Kubernetes {{.Version}}
-{{end}}
-{{end}}
+</li>
 </p>

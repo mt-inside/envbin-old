@@ -7,6 +7,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"runtime"
 )
 
 import (
@@ -117,6 +118,8 @@ func getHostname() (hostname string) {
 type PageData struct {
 	HostIp   string
 	Hostname string
+	HostOs   string
+	HostArch string
 	ClientIp string
 	Aws      *Ec2Env
 	K8s      *K8sEnv
@@ -130,6 +133,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	k8s := getK8sEnv()
 
 	data := &PageData{
+		HostOs:   runtime.GOOS,
+		HostArch: runtime.GOARCH,
 		HostIp:   hostip,
 		Hostname: hostname,
 		ClientIp: clientip,
