@@ -7,6 +7,8 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"os/exec"
+	"path/filepath"
 	"runtime"
 )
 
@@ -143,6 +145,14 @@ type PageData struct {
 	Aws       *Ec2Env
 }
 
+func getSiblingPath(file string) string {
+	me, err := os.Executable()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return filepath.Join(filepath.Dir(me), file)
+}
+
 func handler(w http.ResponseWriter, r *http.Request) {
 	hostip := getDefaultIp()
 	hostname := getHostname()
@@ -160,9 +170,14 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		Aws:       getEc2Env(),
 	}
 
-	t, err := template.ParseFiles("main.html")
+	var t *template.Template
+	var err error
+	t, err = template.ParseFiles(getSiblingPath("main.html"))
 	if err != nil {
-		log.Fatalf("%v. Hint: ensure main.html is in $PWD.", err)
+		t, err = template.ParseFiles("main.html")
+		if err != nil {
+			log.Fatalf("%v. Hint: ensure main.html is alongside executable or in $PWD.", err)
+		}
 	}
 	t.Execute(w, data)
 }
