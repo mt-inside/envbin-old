@@ -8,5 +8,6 @@ this is envbin - throw it somewhere and have it tell you where it is. It should 
 - filesystems, df, etc
 - cpu, ram, etc
 - all interfaces
-- traceroute to 8.8.8.8
+- traceroute to 8.8.8.8 (seoarate endpoint)
 - virtwhat
+Smallest image that will do (that will run infrabin, even if it needs copying in manually)
