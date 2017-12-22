@@ -51,6 +51,22 @@ func getEc2Env() *Ec2Env {
 	}
 }
 
+type VirtualEnv struct {
+	Virtualisation string
+}
+
+func getVirtualEnv() *VirtualEnv {
+	return nil
+}
+
+type ContainerEnv struct {
+	Containerisation string
+}
+
+func getContainerEnv() *ContainerEnv {
+	return nil
+}
+
 type K8sEnv struct {
 	Version string
 }
@@ -116,30 +132,32 @@ func getHostname() (hostname string) {
 }
 
 type PageData struct {
-	HostIp   string
-	Hostname string
-	HostOs   string
-	HostArch string
-	ClientIp string
-	Aws      *Ec2Env
-	K8s      *K8sEnv
+	HostIp    string
+	Hostname  string
+	HostOs    string
+	HostArch  string
+	ClientIp  string
+	Container *ContainerEnv
+	K8s       *K8sEnv
+	Virtual   *VirtualEnv
+	Aws       *Ec2Env
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	hostip := getDefaultIp()
 	hostname := getHostname()
 	clientip := r.RemoteAddr
-	aws := getEc2Env()
-	k8s := getK8sEnv()
 
 	data := &PageData{
-		HostOs:   runtime.GOOS,
-		HostArch: runtime.GOARCH,
-		HostIp:   hostip,
-		Hostname: hostname,
-		ClientIp: clientip,
-		Aws:      aws,
-		K8s:      k8s,
+		Hostname:  hostname,
+		HostIp:    hostip,
+		HostOs:    runtime.GOOS,
+		HostArch:  runtime.GOARCH,
+		ClientIp:  clientip,
+		Container: getContainerEnv(),
+		K8s:       getK8sEnv(),
+		Virtual:   getVirtualEnv(),
+		Aws:       getEc2Env(),
 	}
 
 	t, err := template.ParseFiles("main.html")
