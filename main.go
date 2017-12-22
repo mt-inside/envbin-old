@@ -58,7 +58,20 @@ type VirtualEnv struct {
 }
 
 func getVirtualEnv() *VirtualEnv {
-	return nil
+	virtwhat := exec.Command("virt-what")
+	cmdOut, err := virtwhat.Output()
+	if err != nil {
+		/* TODO: tagged union that can represent: none, unknown, Some() */
+		return &VirtualEnv{"unknown"}
+	}
+	virt := string(cmdOut)
+	if virt == "" {
+		return nil
+	} else {
+		return &VirtualEnv{virt}
+	}
+	/*
+	* - nested virtualisation? */
 }
 
 type ContainerEnv struct {
