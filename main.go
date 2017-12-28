@@ -64,6 +64,7 @@ func getVirtualEnv() *VirtualEnv {
 		/* TODO: tagged union that can represent: none, unknown, Some() */
 		return &VirtualEnv{"unknown"}
 	}
+	/* This seems to be the simple version of ioutil.ReadAll() */
 	virt := string(cmdOut)
 	if virt == "" {
 		return nil
