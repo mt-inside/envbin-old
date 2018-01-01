@@ -1,4 +1,5 @@
-Background the slow tasks (use pusher to update the page)
+Readme - this is about the container’s hosting. If you want to know about its external connectivity, use infra bin, if you want to know about your *client*, use httpbin
+Background the slow tasks (use pusher to update the page) async - or in response to ajax calls to endpoints - does go http run your handler on a grouting or do you need to spawn one?)
 use telepresence to debug on k8s
 external IP (via a service) and DNS name of that IP
 this is envbin - throw it somewhere and have it tell you where it is. It should show:
@@ -9,5 +10,7 @@ this is envbin - throw it somewhere and have it tell you where it is. It should 
 - cpu, ram, etc
 - all interfaces
 - traceroute to 8.8.8.8 (seoarate endpoint)
-- virtwhat
-Smallest image that will do (that will run infrabin, even if it needs copying in manually)
+- client ip & name
+- external IP & name
+- virt-what
+docker auto build.
